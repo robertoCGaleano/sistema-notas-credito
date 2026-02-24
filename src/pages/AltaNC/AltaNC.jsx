@@ -1,4 +1,5 @@
 import { useState } from "react";
+import NavBar from "../../components/NavBar/NavBar";
 import "./AltaNC.css";
 
 function AltaNotaCredito() {
@@ -17,7 +18,7 @@ function AltaNotaCredito() {
   const usuarioDemo = "Usuario 1234";
   const fechaActual = new Date().toLocaleDateString();
 
-  // Base simulada de empresas
+  // Base simulada de empresas luego se usara la base de datos
   const empresasMock = [
     {
       razonSocial: "Shell SA",
@@ -67,9 +68,14 @@ function AltaNotaCredito() {
     alert("Nota de crédito guardada");
   }
 
-  return (
-    <div className="alta-container">
+return (
 
+  <>
+
+    <NavBar />
+
+    <div className="alta-container">
+      
       <h2>Alta Nota de Crédito</h2>
 
       <form onSubmit={handleGuardar}>
@@ -134,7 +140,10 @@ function AltaNotaCredito() {
       </form>
 
     </div>
-  );
+
+  </>
+
+);
 }
 
 export default AltaNotaCredito;

@@ -1,57 +1,98 @@
-import "./Login.css"
-import { useNavigate } from "react-router-dom"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
+const Login = () => {
 
-function Login() {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
+  const [usuario, setUsuario] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const handleLogin = (event) => {
+  const handleLogin = (e) => {
+    e.preventDefault();
 
-    event.preventDefault()
-
-    const legajo = event.target.legajo.value
-    const password = event.target.password.value
-
-    if (legajo === "1234" && password === "1234") {
-      alert("Login correcto")
-      navigate("/alta-nota")
-    } else {
-      alert("Legajo o contraseña incorrectos")
+    if (!usuario || !password) {
+      setError("Debe completar usuario y contraseña");
+      return;
     }
 
-  }
+    // Simulación login correcto
+    if (usuario === "admin" && password === "1234") {
+
+      navigate("/altaNC");
+
+    } else {
+
+      setError("Usuario o contraseña incorrectos");
+
+    }
+  };
+
+  const handleCrearUsuario = () => {
+
+    navigate("/crearUsuario");
+
+  };
 
   return (
 
-  <div className="login-container">
+    <div className="login-container">
 
-    <form onSubmit={handleLogin} className="login-form">
+      <div className="login-box">
 
-      <h2 className="login-title">
-        Sistema Notas de Crédito
-      </h2>
+        <h2 className="login-title">SGNC</h2>
+        <p className="login-subtitle">Sistema de Gestión de Notas de Crédito</p>
 
-      <label>Legajo</label>
-      <input name="legajo" type="number" required className="login-input" />
+        <form onSubmit={handleLogin}>
 
-      <label>Contraseña</label>
-      <input name="password" type="password" required className="login-input" />
+          <div className="login-field">
+            <label>Usuario</label>
+            <input
+              type="text"
+              value={usuario}
+              onChange={(e) => setUsuario(e.target.value)}
+            />
+          </div>
 
-      <button type="submit" className="login-button">
-        Ingresar
-      </button>
+          <div className="login-field">
+            <label>Contraseña</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-      <p className="login-link">
-        ¿No tenés usuario? <a href="#">Crear usuario</a>
-      </p>
+          {error && (
+            <div className="login-error">
+              {error}
+            </div>
+          )}
 
-    </form>
+          <button className="login-button" type="submit">
+            Ingresar
+          </button>
 
-  </div>
+        </form>
 
-)
+        <div className="login-footer">
 
-}
+          <button
+            className="crear-usuario-button"
+            onClick={handleCrearUsuario}
+          >
+            Crear usuario
+          </button>
 
-export default Login
+        </div>
+
+      </div>
+
+    </div>
+
+  );
+};
+
+export default Login;

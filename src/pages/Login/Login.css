@@ -1,49 +1,129 @@
 .login-container {
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   height: 100vh;
-  background-color: #f4f2fb;
+
+  background-color: #f3f4f6;
+
 }
 
-.login-form {
-  display: flex;
-  flex-direction: column;
-  width: 320px;
-  padding: 25px;
+.login-box {
+
   background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+  padding: 40px;
+
+  border-radius: 8px;
+
+  width: 350px;
+
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
 }
 
 .login-title {
+
   text-align: center;
-  margin-bottom: 15px;
+
+  margin-bottom: 5px;
+
+  color: #1e3a8a;
+
 }
 
-.login-input {
-  margin-bottom: 10px;
+.login-subtitle {
+
+  text-align: center;
+
+  font-size: 14px;
+
+  margin-bottom: 20px;
+
+  color: gray;
+
+}
+
+.login-field {
+
+  display: flex;
+
+  flex-direction: column;
+
+  margin-bottom: 15px;
+
+}
+
+.login-field input {
+
   padding: 8px;
-  border-radius: 6px;
-  border: 1px solid #d4c9f5;
-  background-color: #f3efff;
+
+  border-radius: 4px;
+
+  border: 1px solid #ccc;
+
 }
 
 .login-button {
+
+  width: 100%;
+
   padding: 10px;
-  border-radius: 6px;
-  border: none;
-  background-color: #6c4cd3;
+
+  background-color: #1e3a8a;
+
   color: white;
-  font-weight: bold;
+
+  border: none;
+
+  border-radius: 4px;
+
   cursor: pointer;
+
 }
 
 .login-button:hover {
-  background-color: #5936c7;
+
+  background-color: #1e40af;
+
 }
 
-.login-link {
+.login-error {
+
+  color: red;
+
+  margin-bottom: 10px;
+
+  font-size: 14px;
+
+}
+
+.login-footer {
+
+  margin-top: 15px;
+
   text-align: center;
-  margin-top: 10px;
+
+}
+
+.crear-usuario-button {
+
+  background: none;
+
+  border: none;
+
+  color: #1e3a8a;
+
+  cursor: pointer;
+
+  font-weight: bold;
+
+}
+
+.crear-usuario-button:hover {
+
+  text-decoration: underline;
+
 }
