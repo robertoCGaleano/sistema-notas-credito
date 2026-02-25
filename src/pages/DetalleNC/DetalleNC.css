@@ -1,0 +1,51 @@
+.detalle-container {
+
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+
+}
+
+.detalle-container label {
+
+  display: block;
+  margin-top: 10px;
+
+}
+
+.detalle-container input,
+.detalle-container textarea,
+.detalle-container select {
+
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+
+}
+
+.archivo-link {
+
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+
+}
+
+.botones {
+
+  margin-top: 20px;
+
+}
+
+.botones button {
+
+  background-color: #6a0dad;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+
+}

@@ -1,0 +1,43 @@
+.empresas-container {
+
+  max-width: 500px;
+  margin: auto;
+  padding: 30px;
+
+}
+
+.empresas-container label {
+
+  display: block;
+  margin-top: 10px;
+
+}
+
+.empresas-container input {
+
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+
+}
+
+.empresas-container button {
+
+  margin-top: 20px;
+  background-color: #6a0dad;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+
+}
+
+.empresas-container button:hover {
+
+  background-color: #5a009d;
+
+}

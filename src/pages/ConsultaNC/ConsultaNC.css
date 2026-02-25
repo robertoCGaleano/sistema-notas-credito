@@ -1,0 +1,85 @@
+.consulta-container {
+
+  padding: 30px;
+
+}
+
+h2 {
+
+  margin-bottom: 20px;
+
+}
+
+.filtros {
+
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+
+}
+
+.filtros input {
+
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+
+}
+
+.filtros button {
+
+  background-color: #6a0dad;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+
+}
+
+table {
+
+  width: 100%;
+  border-collapse: collapse;
+
+}
+
+th, td {
+
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+
+}
+
+th {
+
+  background-color: #6a0dad;
+  color: white;
+
+}
+
+td button {
+
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+
+}
+
+td button:first-child {
+
+  background-color: #2196f3;
+  color: white;
+
+}
+
+td button:last-child {
+
+  background-color: #ff9800;
+  color: white;
+
+}
