@@ -21,7 +21,7 @@ function ConsultaNC() {
       numeroCliente: "1001",
       cuit: "30712345678",
       monto: 50000,
-      estado: "Creada",
+      estado: "Aprobada",
       fecha: "20/02/2026",
       usuario: "1234"
     },

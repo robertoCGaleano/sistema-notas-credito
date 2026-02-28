@@ -16,7 +16,7 @@ function DetalleNC() {
     numeroSap: "SAP001",
     motivo: "Error en facturación",
     monto: 50000,
-    estado: "Creada",
+    estado: "En Proceso",
     fecha: "20/02/2026",
     usuario: "1234",
     emailEmpresa: "contacto@shell.com",
@@ -119,9 +119,9 @@ function DetalleNC() {
           disabled={!modoEdicion}
           onChange={handleChange}
         >
-          <option>Creada</option>
+          <option>Aprobada</option>
           <option>En Proceso</option>
-          <option>Anulada</option>
+          <option>Rechazada</option>
         </select>
 
         <label>Archivo adjunto</label>

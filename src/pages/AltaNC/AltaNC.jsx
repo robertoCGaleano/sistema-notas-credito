@@ -59,7 +59,7 @@ function AltaNotaCredito() {
       motivo,
       monto,
       archivo,
-      estado: "Creada",
+      estado: "En Proceso",
       fecha: fechaActual,
       usuario: usuarioDemo
     };
@@ -129,7 +129,7 @@ return (
           onChange={(e) => setArchivo(e.target.files[0])}
         />
 
-        <p>Estado: Creada</p>
+        <p>Estado: En Proceso</p>
         <p>Fecha: {fechaActual}</p>
         <p>Usuario: {usuarioDemo}</p>
 
