@@ -15,4 +15,38 @@ const getNotas = async (req, res) => {
     res.status(200).json(data);
 };
 
-module.exports = {getNotas};
+
+const postNota = async (req, res) => {
+
+  try {
+
+    const {
+      fechaCreacion,
+      motivo,
+      monto,
+      nroFactura,
+      estado,
+      legajoUsuario,
+      nroCliente
+    } = req.body;
+
+    const nuevaNota = await db.NotaCredito.create({
+      fechaCreacion,
+      motivo,
+      monto,
+      nroFactura,
+      estado,
+      legajoUsuario,
+      nroCliente
+    });
+
+    res.status(201).json(nuevaNota);
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Error al crear la nota" });
+  }
+
+};
+
+module.exports = {getNotas, postNota};

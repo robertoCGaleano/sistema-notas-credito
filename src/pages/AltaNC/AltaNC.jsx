@@ -1,8 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import "./AltaNC.css";
 
 function AltaNotaCredito() {
+
+  const navigate = useNavigate();
+
+  const usuarioGuardado = JSON.parse(localStorage.getItem("usuarioLogueado"));
+
+  useEffect(() => {
+    if (!usuarioGuardado) {
+      navigate("/");
+    }
+  }, [usuarioGuardado, navigate]);
 
   const [empresa, setEmpresa] = useState({
     razonSocial: "",
@@ -13,137 +24,172 @@ function AltaNotaCredito() {
 
   const [motivo, setMotivo] = useState("");
   const [monto, setMonto] = useState("");
+  const [nroFactura, setNroFactura] = useState("");
   const [archivo, setArchivo] = useState(null);
 
-  const usuarioDemo = "Usuario 1234";
   const fechaActual = new Date().toLocaleDateString();
 
-  // Base simulada de empresas luego se usara la base de datos
+  // mock temporal
   const empresasMock = [
     {
-      razonSocial: "Shell SA",
-      numeroCliente: "1001",
-      cuit: "30712345678",
-      numeroSap: "SAP001"
+      razonSocial: "Shell",
+      numeroCliente: "1000",
+      cuit: "201112223334",
+      numeroSap: "SAP100"
     },
     {
-      razonSocial: "YPF SRL",
+      razonSocial: "YPF",
+      numeroCliente: "1001",
+      cuit: "201112223335",
+      numeroSap: "SAP101"
+    },
+    {
+      razonSocial: "Axion",
       numeroCliente: "1002",
-      cuit: "30798765432",
-      numeroSap: "SAP002"
+      cuit: "201112223336",
+      numeroSap: "SAP102"
     }
   ];
 
-  function buscarEmpresa(valor, campo) {
+ function autocompletarEmpresa(valor, campo) {
 
-    const encontrada = empresasMock.find(
-      (emp) => emp[campo] === valor
-    );
+  const encontrada = empresasMock.find(
+    (emp) => emp[campo] === valor
+  );
 
-    if (encontrada) {
-      setEmpresa(encontrada);
-    }
-    else {
-      setEmpresa({
-        ...empresa,
-        [campo]: valor
-      });
-    }
+  if (encontrada) {
+    setEmpresa(encontrada);
   }
+}
 
-  function handleGuardar(e) {
+  async function handleGuardar(e) {
     e.preventDefault();
 
-    const nuevaNC = {
-      empresa,
-      motivo,
-      monto,
-      archivo,
-      estado: "En Proceso",
-      fecha: fechaActual,
-      usuario: usuarioDemo
-    };
+    try {
+      const response = await fetch("http://localhost:3001/notas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          fechaCreacion: new Date(),
+          motivo,
+          monto: Number(monto),
+          nroFactura: Number(nroFactura),
+          estado: "enProceso",
+          legajoUsuario: usuarioGuardado.legajo,
+          nroCliente: Number(empresa.numeroCliente)
+        })
+      });
 
-    console.log("NC creada:", nuevaNC);
-    alert("Nota de crédito guardada");
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message);
+        return;
+      }
+
+      alert("Nota de crédito creada correctamente");
+
+    } catch (error) {
+      alert("Error al conectar con el servidor");
+    }
   }
 
-return (
+  return (
+    <>
+      <NavBar />
 
-  <>
+      <div className="alta-container">
+        <h2>Alta Nota de Crédito</h2>
 
-    <NavBar />
+        <form onSubmit={handleGuardar}>
 
-    <div className="alta-container">
-      
-      <h2>Alta Nota de Crédito</h2>
+          <label>Razón Social</label>
+          <input
+            value={empresa.razonSocial}
+            onChange={(e) =>
+              setEmpresa({
+                ...empresa,
+                razonSocial: e.target.value
+              })
+            }
+            onBlur={(e) =>
+              autocompletarEmpresa(e.target.value, "razonSocial")
+            }
+          />
 
-      <form onSubmit={handleGuardar}>
+          <label>Número de Cliente</label>
+          <input
+            value={empresa.numeroCliente}
+            onChange={(e) =>
+              setEmpresa({
+                ...empresa,
+                numeroCliente: e.target.value
+              })
+            }
+            onBlur={(e) =>
+              autocompletarEmpresa(e.target.value, "numeroCliente")
+            }
+          />
+          <label>CUIT</label>
+          <input
+            value={empresa.cuit}
+            onChange={(e) =>
+              setEmpresa({
+                ...empresa,
+                cuit: e.target.value
+              })
+            }
+            onBlur={(e) =>
+              autocompletarEmpresa(e.target.value, "cuit")
+            }
+          />
 
-        <label>Razón Social</label>
-        <input
-          value={empresa.razonSocial}
-          onChange={(e) =>
-            buscarEmpresa(e.target.value, "razonSocial")
-          }
-        />
+          <label>Número SAP</label>
+          <input
+            value={empresa.numeroSap}
+            readOnly
+          />
 
-        <label>Número de Cliente</label>
-        <input
-          value={empresa.numeroCliente}
-          onChange={(e) =>
-            buscarEmpresa(e.target.value, "numeroCliente")
-          }
-        />
+          <label>Motivo</label>
+          <textarea
+            value={motivo}
+            onChange={(e) => setMotivo(e.target.value)}
+          />
 
-        <label>CUIT</label>
-        <input
-          value={empresa.cuit}
-          onChange={(e) =>
-            buscarEmpresa(e.target.value, "cuit")
-          }
-        />
+          <label>Monto</label>
+          <input
+            type="number"
+            value={monto}
+            onChange={(e) => setMonto(e.target.value)}
+          />
 
-        <label>Número SAP</label>
-        <input
-          value={empresa.numeroSap}
-          readOnly
-        />
+          <label>Nro. Factura</label>
+          <input
+            type="number"
+            value={nroFactura}
+            onChange={(e) => setNroFactura(e.target.value)}
+          />
 
-        <label>Motivo</label>
-        <textarea
-          value={motivo}
-          onChange={(e) => setMotivo(e.target.value)}
-        />
+          <label>Adjuntar archivo</label>
+          <input
+            type="file"
+            onChange={(e) => setArchivo(e.target.files[0])}
+          />
 
-        <label>Monto</label>
-        <input
-          type="number"
-          value={monto}
-          onChange={(e) => setMonto(e.target.value)}
-        />
+          <p>Estado: En Proceso</p>
+          <p>Fecha: {fechaActual}</p>
+          <p>Usuario: {usuarioGuardado?.legajo}</p>
 
-        <label>Adjuntar archivo</label>
-        <input
-          type="file"
-          onChange={(e) => setArchivo(e.target.files[0])}
-        />
+          <button type="submit">
+            Guardar
+          </button>
 
-        <p>Estado: En Proceso</p>
-        <p>Fecha: {fechaActual}</p>
-        <p>Usuario: {usuarioDemo}</p>
-
-        <button type="submit">
-          Guardar
-        </button>
-
-      </form>
-
-    </div>
-
-  </>
-
-);
+        </form>
+      </div>
+    </>
+  );
 }
 
 export default AltaNotaCredito;

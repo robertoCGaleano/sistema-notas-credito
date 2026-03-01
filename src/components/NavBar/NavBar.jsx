@@ -1,7 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./NavBar.css";
 
 function NavBar() {
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("usuarioLogueado");
+    navigate("/");
+  };
 
   return (
 
@@ -18,6 +25,13 @@ function NavBar() {
         <Link to="/consultaNC">Consulta</Link>
 
         <Link to="/empresas">Empresas</Link>
+
+        <button 
+          onClick={handleLogout} 
+          className="logout-button"
+        >
+          Cerrar sesión
+        </button>
 
       </div>
 

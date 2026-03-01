@@ -36,6 +36,8 @@ const Login = () => {
       setError(data.message);
       return;
     }
+    
+    localStorage.setItem("usuarioLogueado", JSON.stringify(data.user));
 
     navigate("/altaNC");
 
