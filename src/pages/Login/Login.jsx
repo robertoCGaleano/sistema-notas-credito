@@ -10,31 +10,43 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const handleLogin = (e) => {
-    e.preventDefault();
+  const handleLogin = async (e) => {
+  e.preventDefault();
 
-    if (!usuario || !password) {
-      setError("Debe completar usuario y contraseña");
+  if (!usuario || !password) {
+    setError("Debe completar usuario y contraseña");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:3001/user/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        legajo: Number(usuario),
+        password: password
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.message);
       return;
     }
 
-    // Simulación login correcto
-    if (usuario === "admin" && password === "1234") {
+    navigate("/altaNC");
 
-      navigate("/altaNC");
+  } catch (error) {
+    setError("Error de conexión con el servidor");
+  }
+};
 
-    } else {
-
-      setError("Usuario o contraseña incorrectos");
-
-    }
-  };
-
-  const handleCrearUsuario = () => {
-
-    navigate("/crearUsuario");
-
-  };
+const handleCrearUsuario = () => {
+  navigate("/crearUsuario");
+};
 
   return (
 

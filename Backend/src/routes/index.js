@@ -2,9 +2,9 @@ const { Router } = require("express");
 const router = Router();
 
 const userRoute = require("./user.route");
-// después agregaremos notas.router
+const notasRoute = require("./nota.route")
 
 router.use("/user", userRoute);
-// router.use("/notas", notasRoute);
+router.use("/notas", notasRoute);
 
 module.exports = router;

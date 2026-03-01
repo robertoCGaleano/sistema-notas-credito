@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
 
       NotaCredito.belongsTo(models.Usuario, {
-        foreignKey: "legajo"
+        foreignKey: "legajoUsuario"
       });
 
       NotaCredito.belongsTo(models.Empresa, {
@@ -26,8 +26,9 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     fechaCreacion: {
-      type: DataTypes.DATE,
-      allowNull: false
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+      defaultValue: DataTypes.NOW
     },
     motivo: {
       type: DataTypes.STRING,
