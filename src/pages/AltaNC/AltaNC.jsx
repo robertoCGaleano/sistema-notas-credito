@@ -22,6 +22,8 @@ function AltaNotaCredito() {
     numeroSap: ""
   });
 
+  const [empresas, setEmpresas] = useState([]);
+
   const [motivo, setMotivo] = useState("");
   const [monto, setMonto] = useState("");
   const [nroFactura, setNroFactura] = useState("");
@@ -29,48 +31,65 @@ function AltaNotaCredito() {
 
   const fechaActual = new Date().toLocaleDateString();
 
-  // mock temporal
-  const empresasMock = [
-    {
-      razonSocial: "Shell",
-      numeroCliente: "1000",
-      cuit: "201112223334",
-      numeroSap: "SAP100"
-    },
-    {
-      razonSocial: "YPF",
-      numeroCliente: "1001",
-      cuit: "201112223335",
-      numeroSap: "SAP101"
-    },
-    {
-      razonSocial: "Axion",
-      numeroCliente: "1002",
-      cuit: "201112223336",
-      numeroSap: "SAP102"
+  // CARGAR EMPRESAS DESDE BACKEND
+  useEffect(() => {
+
+    async function cargarEmpresas() {
+
+      try {
+
+        const response = await fetch("http://localhost:3001/empresas");
+
+        const data = await response.json();
+
+        setEmpresas(data);
+
+      } catch (error) {
+
+        console.log("Error cargando empresas");
+
+      }
+
     }
-  ];
 
- function autocompletarEmpresa(valor, campo) {
+    cargarEmpresas();
 
-  const encontrada = empresasMock.find(
-    (emp) => emp[campo] === valor
-  );
+  }, []);
 
-  if (encontrada) {
-    setEmpresa(encontrada);
+  // AUTOCOMPLETAR EMPRESA
+  function autocompletarEmpresa(valor, campo) {
+
+    const encontrada = empresas.find(
+      (emp) => String(emp[campo]) === String(valor)
+    );
+
+    if (encontrada) {
+
+      setEmpresa({
+        razonSocial: encontrada.razonSocial,
+        numeroCliente: encontrada.nroCliente,
+        cuit: encontrada.cuit,
+        numeroSap: encontrada.nroSap
+      });
+
+    }
+
   }
-}
 
   async function handleGuardar(e) {
+
     e.preventDefault();
 
     try {
+
       const response = await fetch("http://localhost:3001/notas", {
+
         method: "POST",
+
         headers: {
           "Content-Type": "application/json"
         },
+
         body: JSON.stringify({
           fechaCreacion: new Date(),
           motivo,
@@ -80,6 +99,7 @@ function AltaNotaCredito() {
           legajoUsuario: usuarioGuardado.legajo,
           nroCliente: Number(empresa.numeroCliente)
         })
+
       });
 
       const data = await response.json();
@@ -91,21 +111,39 @@ function AltaNotaCredito() {
 
       alert("Nota de crédito creada correctamente");
 
+      // limpiar formulario
+      setMotivo("");
+      setMonto("");
+      setNroFactura("");
+      setEmpresa({
+        razonSocial: "",
+        numeroCliente: "",
+        cuit: "",
+        numeroSap: ""
+      });
+
     } catch (error) {
+
       alert("Error al conectar con el servidor");
+
     }
+
   }
 
   return (
+
     <>
+
       <NavBar />
 
       <div className="alta-container">
+
         <h2>Alta Nota de Crédito</h2>
 
         <form onSubmit={handleGuardar}>
 
           <label>Razón Social</label>
+
           <input
             value={empresa.razonSocial}
             onChange={(e) =>
@@ -120,6 +158,7 @@ function AltaNotaCredito() {
           />
 
           <label>Número de Cliente</label>
+
           <input
             value={empresa.numeroCliente}
             onChange={(e) =>
@@ -129,10 +168,12 @@ function AltaNotaCredito() {
               })
             }
             onBlur={(e) =>
-              autocompletarEmpresa(e.target.value, "numeroCliente")
+              autocompletarEmpresa(e.target.value, "nroCliente")
             }
           />
+
           <label>CUIT</label>
+
           <input
             value={empresa.cuit}
             onChange={(e) =>
@@ -147,18 +188,21 @@ function AltaNotaCredito() {
           />
 
           <label>Número SAP</label>
+
           <input
             value={empresa.numeroSap}
             readOnly
           />
 
           <label>Motivo</label>
+
           <textarea
             value={motivo}
             onChange={(e) => setMotivo(e.target.value)}
           />
 
           <label>Monto</label>
+
           <input
             type="number"
             value={monto}
@@ -166,6 +210,7 @@ function AltaNotaCredito() {
           />
 
           <label>Nro. Factura</label>
+
           <input
             type="number"
             value={nroFactura}
@@ -173,6 +218,7 @@ function AltaNotaCredito() {
           />
 
           <label>Adjuntar archivo</label>
+
           <input
             type="file"
             onChange={(e) => setArchivo(e.target.files[0])}
@@ -187,9 +233,13 @@ function AltaNotaCredito() {
           </button>
 
         </form>
+
       </div>
+
     </>
+
   );
+
 }
 
 export default AltaNotaCredito;

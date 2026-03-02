@@ -1,10 +1,12 @@
 const { Router } = require("express");
 const router = Router();
 
-const { getNotas, postNota } = require("../controllers/nota.controllers");
+const { notaController } = require("../controllers");
 
-router.get("/", getNotas);
+router.get("/", notaController.getNotas);
 
-router.post("/", postNota);
+router.get("/:id", notaController.getNotaById);
+
+router.post("/", notaController.postNota);
 
 module.exports = router;

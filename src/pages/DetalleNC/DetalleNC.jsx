@@ -1,28 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import "./DetalleNC.css";
 
 function DetalleNC() {
 
-  // estado que controla si se puede editar
+  const { id } = useParams();
+
   const [modoEdicion, setModoEdicion] = useState(false);
 
-  // datos simulados 
-  const [notaCredito, setNotaCredito] = useState({
+  const [notaCredito, setNotaCredito] = useState(null);
 
-    razonSocial: "Shell SA",
-    numeroCliente: "1001",
-    cuit: "30712345678",
-    numeroSap: "SAP001",
-    motivo: "Error en facturación",
-    monto: 50000,
-    estado: "En Proceso",
-    fecha: "20/02/2026",
-    usuario: "1234",
-    emailEmpresa: "contacto@shell.com",
-    archivo: "archivo.pdf"
+  // Carga nota desde backend
+  useEffect(() => {
 
-  });
+    async function cargarNota() {
+
+      try {
+
+        const response = await fetch(`http://localhost:3001/notas/${id}`);
+
+        const data = await response.json();
+
+        setNotaCredito(data);
+
+      } catch (error) {
+
+        console.log("Error cargando la nota");
+
+      }
+
+    }
+
+    cargarNota();
+
+  }, [id]);
+
+
 
   function handleEditar() {
 
@@ -30,28 +44,79 @@ function DetalleNC() {
 
   }
 
-  function handleGuardar() {
 
-    setModoEdicion(false);
 
-    console.log("NC actualizada:", notaCredito);
+  async function handleGuardar() {
 
-    alert("Cambios guardados");
+    try {
+
+      const response = await fetch(`http://localhost:3001/notas/${id}`, {
+
+        method: "PUT",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        body: JSON.stringify({
+
+          motivo: notaCredito.motivo,
+          monto: Number(notaCredito.monto),
+          estado: notaCredito.estado
+
+        })
+
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+
+        alert(data.message);
+        return;
+
+      }
+
+      alert("Nota actualizada");
+
+      setModoEdicion(false);
+
+    } catch (error) {
+
+      alert("Error al actualizar la nota");
+
+    }
 
   }
+
+
 
   function handleChange(e) {
 
     setNotaCredito({
+
       ...notaCredito,
+
       [e.target.name]: e.target.value
+
     });
 
   }
 
+
+
+  if (!notaCredito) {
+
+    return <p>Cargando...</p>;
+
+  }
+
+
+
   return (
 
     <>
+
       <NavBar />
 
       <div className="detalle-container">
@@ -60,39 +125,32 @@ function DetalleNC() {
 
         <label>Razón Social</label>
         <input
-          name="razonSocial"
-          value={notaCredito.razonSocial}
-          onChange={handleChange}
-          disabled={!modoEdicion}
+          value={notaCredito.Empresa?.razonSocial}
+          disabled
         />
 
         <label>Número Cliente</label>
         <input
-          name="numeroCliente"
-          value={notaCredito.numeroCliente}
+          value={notaCredito.Empresa?.nroCliente}
           disabled
         />
 
         <label>CUIT</label>
         <input
-          name="cuit"
-          value={notaCredito.cuit}
+          value={notaCredito.Empresa?.cuit}
           disabled
         />
 
         <label>Número SAP</label>
         <input
-          name="numeroSap"
-          value={notaCredito.numeroSap}
+          value={notaCredito.Empresa?.nroSap}
           disabled
         />
 
         <label>Email Empresa</label>
         <input
-          name="emailEmpresa"
-          value={notaCredito.emailEmpresa}
-          disabled={!modoEdicion}
-          onChange={handleChange}
+          value={notaCredito.Empresa?.emailContacto}
+          disabled
         />
 
         <label>Motivo</label>
@@ -119,19 +177,14 @@ function DetalleNC() {
           disabled={!modoEdicion}
           onChange={handleChange}
         >
-          <option>Aprobada</option>
-          <option>En Proceso</option>
-          <option>Rechazada</option>
+          <option value="aprobada">Aprobada</option>
+          <option value="enProceso">En Proceso</option>
+          <option value="rechazada">Rechazada</option>
         </select>
 
-        <label>Archivo adjunto</label>
-        <p className="archivo-link">
-          {notaCredito.archivo}
-        </p>
+        <p>Fecha: {notaCredito.fechaCreacion}</p>
 
-        <p>Fecha: {notaCredito.fecha}</p>
-
-        <p>Usuario: {notaCredito.usuario}</p>
+        <p>Usuario: {notaCredito.Usuario?.legajo}</p>
 
         <div className="botones">
 

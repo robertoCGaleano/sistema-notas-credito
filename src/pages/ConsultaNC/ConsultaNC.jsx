@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import "./ConsultaNC.css";
 
@@ -13,29 +13,33 @@ function ConsultaNC() {
     usuario: ""
   });
 
-  // datos simulados 
-  const [notasCredito] = useState([
-    {
-      id: 1,
-      razonSocial: "Shell SA",
-      numeroCliente: "1001",
-      cuit: "30712345678",
-      monto: 50000,
-      estado: "Aprobada",
-      fecha: "20/02/2026",
-      usuario: "1234"
-    },
-    {
-      id: 2,
-      razonSocial: "YPF SRL",
-      numeroCliente: "1002",
-      cuit: "30798765432",
-      monto: 120000,
-      estado: "En Proceso",
-      fecha: "18/02/2026",
-      usuario: "5678"
+  // estado donde se guardan las notas que vienen del backend
+  const [notasCredito, setNotasCredito] = useState([]);
+
+  // 🔹 cuando la pantalla se carga llama al backend
+  useEffect(() => {
+
+    async function cargarNotas() {
+
+      try {
+
+        const response = await fetch("http://localhost:3001/notas");
+
+        const data = await response.json();
+
+        setNotasCredito(data);
+
+      } catch (error) {
+
+        console.log("Error al cargar notas");
+
+      }
+
     }
-  ]);
+
+    cargarNotas();
+
+  }, []);
 
   function handleFiltroChange(e) {
 
@@ -48,7 +52,9 @@ function ConsultaNC() {
 
   function handleBuscar() {
 
-    console.log("Filtros:", filtros);
+    console.log("Filtros aplicados:", filtros);
+
+    // después podemos implementar filtros reales
 
   }
 
@@ -137,23 +143,23 @@ function ConsultaNC() {
 
             {notasCredito.map((nc) => (
 
-              <tr key={nc.id}>
+              <tr key={nc.idNotaCredito}>
 
-                <td>{nc.razonSocial}</td>
-                <td>{nc.numeroCliente}</td>
-                <td>{nc.cuit}</td>
+                <td>{nc.Empresa?.razonSocial}</td>
+                <td>{nc.Empresa?.nroCliente}</td>
+                <td>{nc.Empresa?.cuit}</td>
                 <td>${nc.monto}</td>
                 <td>{nc.estado}</td>
-                <td>{nc.fecha}</td>
-                <td>{nc.usuario}</td>
+                <td>{nc.fechaCreacion}</td>
+                <td>{nc.Usuario?.nombre}</td>
 
                 <td>
 
-                  <button onClick={() => handleVer(nc.id)}>
+                  <button onClick={() => handleVer(nc.idNotaCredito)}>
                     Ver
                   </button>
 
-                  <button onClick={() => handleEditar(nc.id)}>
+                  <button onClick={() => handleEditar(nc.idNotaCredito)}>
                     Editar
                   </button>
 
