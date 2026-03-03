@@ -36,15 +36,9 @@ function DetalleNC() {
 
   }, [id]);
 
-
-
   function handleEditar() {
-
     setModoEdicion(true);
-
   }
-
-
 
   async function handleGuardar() {
 
@@ -89,29 +83,16 @@ function DetalleNC() {
 
   }
 
-
-
   function handleChange(e) {
-
     setNotaCredito({
-
       ...notaCredito,
-
       [e.target.name]: e.target.value
-
     });
-
   }
-
-
 
   if (!notaCredito) {
-
-    return <p>Cargando...</p>;
-
+    return <p>Cargando...</p>
   }
-
-
 
   return (
 

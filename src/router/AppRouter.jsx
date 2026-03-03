@@ -20,7 +20,7 @@ function AppRouter() {
 
         <Route path="/consultaNC" element={<ConsultaNC />} />
 
-        <Route path="/detalleNC" element={<DetalleNC />} />
+        <Route path="/detalleNC/:id" element={<DetalleNC />} />
 
         <Route path="/empresas" element={<Empresas />} />
 

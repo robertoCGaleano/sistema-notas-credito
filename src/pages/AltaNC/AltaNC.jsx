@@ -31,7 +31,7 @@ function AltaNotaCredito() {
 
   const fechaActual = new Date().toLocaleDateString();
 
-  // CARGAR EMPRESAS DESDE BACKEND
+  // CARGA EMPRESAS DESDE BACKEND
   useEffect(() => {
 
     async function cargarEmpresas() {
@@ -56,7 +56,7 @@ function AltaNotaCredito() {
 
   }, []);
 
-  // AUTOCOMPLETAR EMPRESA
+  // AUTOCOMPLETA EMPRESA
   function autocompletarEmpresa(valor, campo) {
 
     const encontrada = empresas.find(
@@ -111,7 +111,7 @@ function AltaNotaCredito() {
 
       alert("Nota de crédito creada correctamente");
 
-      // limpiar formulario
+      // limpia formulario
       setMotivo("");
       setMonto("");
       setNroFactura("");

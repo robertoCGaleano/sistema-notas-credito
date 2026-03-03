@@ -32,7 +32,7 @@ function Empresas() {
 
     alert("Empresa creada correctamente");
 
-    // limpiar formulario
+    // limpia formulario
     setEmpresa({
       razonSocial: "",
       cuit: "",

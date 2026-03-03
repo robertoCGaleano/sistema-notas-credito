@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import "./ConsultaNC.css";
 
 function ConsultaNC() {
-
+  const navigate = useNavigate();
   // estado para filtros
   const [filtros, setFiltros] = useState({
     numeroCliente: "",
@@ -16,33 +17,21 @@ function ConsultaNC() {
   // estado donde se guardan las notas que vienen del backend
   const [notasCredito, setNotasCredito] = useState([]);
 
-  // 🔹 cuando la pantalla se carga llama al backend
+  // cuando la pantalla se carga llama al backend
   useEffect(() => {
-
     async function cargarNotas() {
-
       try {
-
         const response = await fetch("http://localhost:3001/notas");
-
         const data = await response.json();
-
         setNotasCredito(data);
-
       } catch (error) {
-
         console.log("Error al cargar notas");
-
       }
-
     }
-
     cargarNotas();
-
   }, []);
 
   function handleFiltroChange(e) {
-
     setFiltros({
       ...filtros,
       [e.target.name]: e.target.value
@@ -51,27 +40,18 @@ function ConsultaNC() {
   }
 
   function handleBuscar() {
-
     console.log("Filtros aplicados:", filtros);
-
-    // después podemos implementar filtros reales
-
   }
 
   function handleVer(id) {
-
-    console.log("Ver detalle:", id);
-
+    navigate(`/detalleNC/${id}`);
   }
 
   function handleEditar(id) {
-
     console.log("Editar NC:", id);
-
   }
 
   return (
-
     <>
       <NavBar />
 
