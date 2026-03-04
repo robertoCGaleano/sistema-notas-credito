@@ -52,7 +52,11 @@ module.exports = (sequelize, DataTypes) => {
     nroCliente: {
       type: DataTypes.INTEGER,
       allowNull: false
-    }
+    },
+    usuarioModificacion: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
 
   }, {
     sequelize,

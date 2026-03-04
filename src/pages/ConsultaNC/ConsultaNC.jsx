@@ -21,7 +21,9 @@ function ConsultaNC() {
   useEffect(() => {
     async function cargarNotas() {
       try {
-        const response = await fetch("http://localhost:3001/notas");
+        const usuario = JSON.parse(localStorage.getItem("usuarioLogueado"));
+        const response = await fetch(
+          `http://localhost:3001/notas?legajo=${usuario.legajo}&admin=${usuario.admin}`);
         const data = await response.json();
         setNotasCredito(data);
       } catch (error) {
@@ -42,14 +44,31 @@ function ConsultaNC() {
   function handleBuscar() {
     console.log("Filtros aplicados:", filtros);
   }
-
+//Boton ver
   function handleVer(id) {
     navigate(`/detalleNC/${id}`);
   }
+//Boton borrar
+  async function handleBorrar(id) {
+  const confirmar = window.confirm("¿Seguro que querés borrar esta Nota de Crédito?");
+  if (!confirmar) return;
+  try {
+    const response = await fetch(`http://localhost:3001/notas/${id}`, {
+      method: "DELETE"
+    });
+    const data = await response.json();
+    if (!response.ok) {
+      alert(data.message);
+      return;
+    }
+    alert("Nota eliminada correctamente");
+    // actualiza la tabla sin recargar la página
+    setNotasCredito(notasCredito.filter(nc => nc.idNotaCredito !== id));
 
-  function handleEditar(id) {
-    console.log("Editar NC:", id);
+  } catch (error) {
+    alert("Error al eliminar la nota");
   }
+}
 
   return (
     <>
@@ -139,8 +158,8 @@ function ConsultaNC() {
                     Ver
                   </button>
 
-                  <button onClick={() => handleEditar(nc.idNotaCredito)}>
-                    Editar
+                  <button onClick={() => handleBorrar(nc.idNotaCredito)}>
+                    Borrar
                   </button>
 
                 </td>

@@ -9,4 +9,8 @@ router.get("/:id", notaController.getNotaById);
 
 router.post("/", notaController.postNota);
 
+router.put("/:id", notaController.updateNota);
+
+router.delete("/:id", notaController.deleteNota);
+
 module.exports = router;

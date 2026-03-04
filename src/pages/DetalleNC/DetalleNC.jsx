@@ -43,44 +43,37 @@ function DetalleNC() {
   async function handleGuardar() {
 
     try {
-
-      const response = await fetch(`http://localhost:3001/notas/${id}`, {
-
-        method: "PUT",
-
-        headers: {
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
-          motivo: notaCredito.motivo,
-          monto: Number(notaCredito.monto),
-          estado: notaCredito.estado
-
-        })
-
-      });
-
+      const usuario = JSON.parse(localStorage.getItem("usuarioLogueado"));
+      const response = await fetch(
+        `http://localhost:3001/notas/${notaCredito.idNotaCredito}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            motivo: notaCredito.motivo,
+            monto: notaCredito.monto,
+            nroFactura: notaCredito.nroFactura,
+            estado: notaCredito.estado,
+            usuarioModificacion: usuario.legajo,
+          })
+        }
+      );
       const data = await response.json();
-
+      console.log("EL ERROR ES ESTE",data);
       if (!response.ok) {
-
         alert(data.message);
         return;
-
       }
 
-      alert("Nota actualizada");
+      alert("Nota actualizada correctamente");
 
       setModoEdicion(false);
 
     } catch (error) {
-
-      alert("Error al actualizar la nota");
-
+      alert("Error al actualizar la nota en Detalle.jsx");
     }
-
   }
 
   function handleChange(e) {
@@ -150,6 +143,14 @@ function DetalleNC() {
           disabled={!modoEdicion}
           onChange={handleChange}
         />
+        <label>Factura</label>
+        <input
+          name="nroFactura"
+          type="number"
+          value={notaCredito.nroFactura}
+          disabled={!modoEdicion}
+          onChange={handleChange}
+        />
 
         <label>Estado</label>
         <select
@@ -166,6 +167,8 @@ function DetalleNC() {
         <p>Fecha: {notaCredito.fechaCreacion}</p>
 
         <p>Usuario: {notaCredito.Usuario?.legajo}</p>
+
+        <p>Última modificación realizada por: {notaCredito.usuarioModificacion}</p>
 
         <div className="botones">
 
