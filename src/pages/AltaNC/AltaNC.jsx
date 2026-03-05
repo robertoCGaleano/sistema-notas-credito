@@ -138,7 +138,7 @@ function AltaNotaCredito() {
 
       <div className="alta-container">
 
-        <h2>Alta Nota de Crédito</h2>
+        <h2 className="titulo">Alta Nota de Crédito</h2>
 
         <form onSubmit={handleGuardar}>
 

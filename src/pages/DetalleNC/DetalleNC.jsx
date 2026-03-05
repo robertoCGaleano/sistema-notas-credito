@@ -95,7 +95,7 @@ function DetalleNC() {
 
       <div className="detalle-container">
 
-        <h2>Detalle Nota de Crédito</h2>
+        <h2 className="titulo">Detalle Nota de Crédito</h2>
 
         <label>Razón Social</label>
         <input

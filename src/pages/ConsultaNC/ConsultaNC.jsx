@@ -11,7 +11,8 @@ function ConsultaNC() {
     cuit: "",
     fechaDesde: "",
     fechaHasta: "",
-    usuario: ""
+    usuario: "",
+    estado: ""
   });
 
   // estado donde se guardan las notas que vienen del backend
@@ -41,14 +42,11 @@ function ConsultaNC() {
 
   }
 
-  function handleBuscar() {
-    console.log("Filtros aplicados:", filtros);
-  }
-//Boton ver
+  //Boton ver
   function handleVer(id) {
     navigate(`/detalleNC/${id}`);
   }
-//Boton borrar
+  //Boton borrar
   async function handleBorrar(id) {
   const confirmar = window.confirm("¿Seguro que querés borrar esta Nota de Crédito?");
   if (!confirmar) return;
@@ -69,6 +67,19 @@ function ConsultaNC() {
     alert("Error al eliminar la nota");
   }
 }
+  //FILTROS
+  const notasFiltradas = notasCredito.filter((nc) => {
+
+    return (
+      (filtros.numeroCliente === "" || nc.Empresa?.nroCliente?.toString().includes(filtros.numeroCliente)) &&
+      (filtros.cuit === "" || nc.Empresa?.cuit?.includes(filtros.cuit)) &&
+      (filtros.usuario === "" || nc.Usuario?.nombre?.toLowerCase().includes(filtros.usuario.toLowerCase())) &&
+      (filtros.estado === "" || nc.estado === filtros.estado) &&
+      (filtros.fechaDesde === "" || new Date(nc.fechaCreacion) >= new Date(filtros.fechaDesde)) &&
+      (filtros.fechaHasta === "" || new Date(nc.fechaCreacion) <= new Date(filtros.fechaHasta))   
+    );
+
+  });
 
   return (
     <>
@@ -76,7 +87,8 @@ function ConsultaNC() {
 
       <div className="consulta-container">
 
-        <h2>Consulta de Notas de Crédito</h2>
+        <h2 className="titulo">Consulta de Notas de Crédito</h2>
+        <p className="subtitulo">Filtrar por:</p>
 
         <div className="filtros">
 
@@ -110,21 +122,28 @@ function ConsultaNC() {
 
           <input
             name="usuario"
-            placeholder="Legajo Usuario"
+            placeholder="Nombre Usuario"
             value={filtros.usuario}
             onChange={handleFiltroChange}
           />
 
-          <button onClick={handleBuscar}>
-            Buscar
-          </button>
+          <select
+            name="estado"
+            value={filtros.estado}
+            onChange={handleFiltroChange}
+          >
+            <option value="">Estados</option>
+            <option value="aprobada">Aprobada</option>
+            <option value="enProceso">En Proceso</option>
+            <option value="rechazada">Rechazada</option>
+          </select>
 
         </div>
-
+        <p className="subtitulo">Total de Notas de Creditos: {notasFiltradas.length}</p>
         <table>
 
           <thead>
-
+          
             <tr>
               <th>Empresa</th>
               <th>N° Cliente</th>
@@ -140,7 +159,7 @@ function ConsultaNC() {
 
           <tbody>
 
-            {notasCredito.map((nc) => (
+            {notasFiltradas.map((nc) => (
 
               <tr key={nc.idNotaCredito}>
 

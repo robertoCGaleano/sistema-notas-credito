@@ -50,7 +50,7 @@ function Empresas() {
 
       <div className="empresas-container">
 
-        <h2>Gestión de Empresas</h2>
+        <h2 className="titulo">Gestión de Empresas</h2>
 
         <form onSubmit={handleGuardar}>
 
