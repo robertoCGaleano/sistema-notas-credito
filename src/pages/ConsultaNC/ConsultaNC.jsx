@@ -25,6 +25,7 @@ function ConsultaNC() {
         const usuario = JSON.parse(localStorage.getItem("usuarioLogueado"));
         const response = await fetch(
           `http://localhost:3001/notas?legajo=${usuario.legajo}&admin=${usuario.admin}`);
+          //`https://r1kp8skz-3001.brs.devtunnels.ms/notas?legajo=${usuario.legajo}&admin=${usuario.admin}`);
         const data = await response.json();
         setNotasCredito(data);
       } catch (error) {
@@ -51,7 +52,9 @@ function ConsultaNC() {
   const confirmar = window.confirm("¿Seguro que querés borrar esta Nota de Crédito?");
   if (!confirmar) return;
   try {
-    const response = await fetch(`http://localhost:3001/notas/${id}`, {
+    const response = await fetch(
+      `http://localhost:3001/notas/${id}`, {
+      //`https://r1kp8skz-3001.brs.devtunnels.ms/notas/${id}`, {
       method: "DELETE"
     });
     const data = await response.json();

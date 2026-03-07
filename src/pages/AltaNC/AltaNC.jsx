@@ -39,7 +39,7 @@ function AltaNotaCredito() {
       try {
 
         const response = await fetch("http://localhost:3001/empresas");
-
+        //const response = await fetch("https://r1kp8skz-3001.brs.devtunnels.ms/empresas");
         const data = await response.json();
 
         setEmpresas(data);
@@ -83,7 +83,7 @@ function AltaNotaCredito() {
     try {
 
       const response = await fetch("http://localhost:3001/notas", {
-
+      //const response = await fetch("https://r1kp8skz-3001.brs.devtunnels.ms/notas", {
         method: "POST",
 
         headers: {
@@ -94,7 +94,7 @@ function AltaNotaCredito() {
           fechaCreacion: new Date(),
           motivo,
           monto: Number(monto),
-          nroFactura: Number(nroFactura),
+          nroFactura,
           estado: "enProceso",
           legajoUsuario: usuarioGuardado.legajo,
           nroCliente: Number(empresa.numeroCliente)
@@ -212,7 +212,6 @@ function AltaNotaCredito() {
           <label>Nro. Factura</label>
 
           <input
-            type="number"
             value={nroFactura}
             onChange={(e) => setNroFactura(e.target.value)}
           />

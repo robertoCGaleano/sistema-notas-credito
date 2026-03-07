@@ -19,7 +19,7 @@ function DetalleNC() {
       try {
 
         const response = await fetch(`http://localhost:3001/notas/${id}`);
-
+        //const response = await fetch(`https://r1kp8skz-3001.brs.devtunnels.ms/notas/${id}`);
         const data = await response.json();
 
         setNotaCredito(data);
@@ -46,6 +46,7 @@ function DetalleNC() {
       const usuario = JSON.parse(localStorage.getItem("usuarioLogueado"));
       const response = await fetch(
         `http://localhost:3001/notas/${notaCredito.idNotaCredito}`,
+        //`https://r1kp8skz-3001.brs.devtunnels.ms/notas/${notaCredito.idNotaCredito}`,
         {
           method: "PUT",
           headers: {
@@ -146,7 +147,6 @@ function DetalleNC() {
         <label>Factura</label>
         <input
           name="nroFactura"
-          type="number"
           value={notaCredito.nroFactura}
           disabled={!modoEdicion}
           onChange={handleChange}

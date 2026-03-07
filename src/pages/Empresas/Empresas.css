@@ -14,8 +14,6 @@
   font-weight: bold;
   font-size: 28px;
   color: #6a0dad;
-  border-bottom: 2px solid #6a0dad;
-  padding-bottom: 5px;
 }
 
 .empresas-container label {
@@ -38,7 +36,7 @@
   box-shadow: 0px 0px 4px rgba(106,13,173,0.4);
 }
 
-.empresas-container button {
+.empresas-container form button {
   margin-top: 20px;
   background-color: #6a0dad;
   color: white;
@@ -50,6 +48,36 @@
   transition: 0.2s;
 }
 
-.empresas-container button:hover {
+.empresas-container form button:hover {
   background-color: #5a009d;
+}
+
+.btn-eliminar {
+  width: auto;
+  padding: 6px 12px;
+  background-color: #dc3545;
+  color: white;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-eliminar:hover {
+  background-color: #bb2d3b;
+}
+td {
+  vertical-align: middle;
+}
+
+td:last-child {
+  text-align: center;
+}
+table {
+  width: 100%;
+  margin-top: 15px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
 }

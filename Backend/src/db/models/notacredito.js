@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       
     },
     nroFactura: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
     estado: {
       type: DataTypes.STRING,

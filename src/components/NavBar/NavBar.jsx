@@ -15,7 +15,8 @@ function NavBar() {
     <nav className="navbar">
 
       <div className="navbar-logo">
-        SGNC
+        <div className="logo-titulo">SGNC</div>
+        <div className="logo-subtitulo">Sistema de Gestión de Notas de Crédito</div>
       </div>
 
       <div className="navbar-links">
