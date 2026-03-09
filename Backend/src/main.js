@@ -15,9 +15,9 @@ const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "API Sistema Notas de Crédito",
+      title: "API Sistema de Gestión de Notas de Crédito",
       version: "1.0.0",
-      description: "Documentación de la API",
+      description: "Documentación de los endpoint de la API",
     },
     servers: [
       {

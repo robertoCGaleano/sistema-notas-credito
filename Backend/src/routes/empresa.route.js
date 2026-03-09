@@ -3,12 +3,109 @@ const router = Router();
 
 const {getEmpresas, getEmpresaById, postEmpresa, deleteEmpresa} = require("../controllers/empresa.controllers");
 
+/**
+ * @swagger
+ * tags:
+ *   name: Empresas
+ *   description: Gestión de clientes corporativos guardados
+ */
+
+/**
+ * @swagger
+ * /empresas:
+ *   get:
+ *     summary: Obtener todas las empresas
+ *     tags: [Empresas]
+ *     responses:
+ *       200:
+ *         description: Lista de empresas
+ */
 router.get("/", getEmpresas);
 
+
+/**
+ * @swagger
+ * /empresas/{nroCliente}:
+ *   get:
+ *     summary: Obtener una empresa por su número de cliente
+ *     tags: [Empresas]
+ *     parameters:
+ *       - in: path
+ *         name: nroCliente
+ *         required: true
+ *         description: El número único de cliente de la empresa
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Empresa encontrada con éxito
+ *       404:
+ *         description: Empresa no encontrada
+ */
 router.get("/:nroCliente", getEmpresaById);
 
+/**
+ * @swagger
+ * /empresas:
+ *   post:
+ *     summary: Registrar una nueva empresa en la base
+ *     tags: [Empresas]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - razonSocial
+ *               - cuit
+ *               - nroCliente
+ *             properties:
+ *               razonSocial:
+ *                 type: string
+ *                 example: Empresa Prueba S.A.
+ *               cuit:
+ *                 type: string
+ *                 example: "30123456789"
+ *               nroCliente:
+ *                 type: integer
+ *                 example: 1000
+ *               nroSap:
+ *                 type: string
+ *                 example: "SAP/101"
+ *               emailContacto:
+ *                 type: string
+ *                 format: email
+ *                 example: "contacto@empresa.com"
+ *     responses:
+ *       201:
+ *         description: Empresa creada correctamente
+ *       400:
+ *         description: Datos inválidos o empresa ya existente (CUIT/NroCliente duplicado)
+ *       500:
+ *         description: Error interno del servidor
+ */
 router.post("/", postEmpresa);
 
+/**
+ * @swagger
+ * /empresas/{nroCliente}:
+ *   delete:
+ *     summary: Eliminar una empresa del sistema
+ *     tags: [Empresas]
+ *     parameters:
+ *       - in: path
+ *         name: nroCliente
+ *         required: true
+ *         description: El número de cliente de la empresa a eliminar
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Empresa eliminada correctamente
+ *       404:
+ *         description: No se encontró la empresa para eliminar
+ */
 router.delete("/:nroCliente", deleteEmpresa);
 
 module.exports = router;

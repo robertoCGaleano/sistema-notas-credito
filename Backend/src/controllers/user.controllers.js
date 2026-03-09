@@ -2,7 +2,10 @@ const db = require ("../db/models");
 
 const getUsers = async (req, res) => {
     const data = await db.Usuario.findAll({})
-    res.status(200).json(data);
+    res.status(200).json({
+      message: "Listado de usuarios registrados",
+      data
+    });
 };
 
 const login = async (req, res) => {
