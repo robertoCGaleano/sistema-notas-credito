@@ -89,8 +89,6 @@ Entrar al proyecto
 
 # Ejecutar Frontend
 
-Instalar dependencias
-
     npm install
 
 Iniciar servidor de desarrollo
