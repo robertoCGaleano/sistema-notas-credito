@@ -66,7 +66,10 @@ const postNota = async (req, res) => {
       legajoUsuario,
       nroCliente
     });
-    res.status(201).json(nuevaNota);
+    res.status(201).json({
+      message: "Nota de crédito creada con éxito",
+      data: nuevaNota
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error al crear la nota" });

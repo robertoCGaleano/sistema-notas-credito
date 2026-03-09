@@ -1,16 +1,104 @@
-# React + Vite
+# Sistema Web de Gestión de Notas de Crédito
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación web desarrollada para la gestión de **Notas de Crédito**, permitiendo registrar, consultar, modificar y eliminar registros asociados a empresas y usuarios.
 
-Currently, two official plugins are available:
+Proyecto realizado como trabajo académico.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## Tecnologías utilizadas
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Backend
+- Node.js
+- Express
+- Sequelize
+- SQLite
 
-## Expanding the ESLint configuration
+### Frontend
+- React
+- Vite
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Documentación y Testing
+- Postman
+- Swagger
+
+---
+
+## Arquitectura del proyecto
+
+Backend
+
+controllers  
+routes  
+models  
+database  
+
+Frontend
+
+components  
+pages  
+services  
+
+---
+
+## Instalación
+
+Clonar el repositorio
+
+```bash
+git clone https://github.com/TU-USUARIO/TU-REPO.git
+
+Instalar dependencias
+npm install
+
+Ejecutar el servidor
+npm start
+
+El backend corre en:
+http://localhost:3001
+
+Documentación de la API
+La API está documentada con Swagger.
+
+Acceder en:
+http://localhost:3001/api-docs
+
+Desde Swagger se pueden:
+
+visualizar endpoints
+
+enviar requests
+
+probar respuestas del backend
+
+Endpoints principales
+
+Usuarios
+POST /user/login
+POST /user
+GET /user
+
+Empresas
+POST /empresas
+GET /empresas
+GET /empresas/:id
+
+Notas de crédito
+GET /notas
+GET /notas/:id
+POST /notas
+PUT /notas/:id
+DELETE /notas/:id
+
+Funcionalidades
+Login de usuarios
+Registro de empresas
+Creación de notas de crédito
+Consulta de notas
+Modificación de notas
+Eliminación de registros
+
+Autor
+Roberto Galeano
+Universidad Nacional de Hurlingham
+2026
