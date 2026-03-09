@@ -8,7 +8,7 @@ const { notaController } = require("../controllers");
  * /notas:
  *   get:
  *     summary: Obtener todas las notas de crédito
- *     tags: [Notas]
+ *     tags: [Notas de Credito]
  *     responses:
  *       200:
  *         description: Lista de notas
@@ -20,12 +20,12 @@ router.get("/", notaController.getNotas);
  * /notas/{id}:
  *   get:
  *     summary: Obtener una nota de crédito por ID
- *     tags: [Notas]
+ *     tags: [Notas de Credito]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID de la nota
+ *         description: ID de la nota de credito
  *         schema:
  *           type: integer
  *     responses:
@@ -41,7 +41,7 @@ router.get("/:id", notaController.getNotaById);
  * /notas:
  *   post:
  *     summary: Crear una nota de crédito
- *     tags: [Notas]
+ *     tags: [Notas de Credito]
  *     requestBody:
  *       required: true
  *       content:
@@ -75,7 +75,7 @@ router.get("/:id", notaController.getNotaById);
  *     responses:
  *       201:
  *         description: Nota creada correctamente
- *       400:
+ *       500:
  *         description: Error en los datos enviados
  */
 router.post("/", notaController.postNota);
@@ -84,13 +84,14 @@ router.post("/", notaController.postNota);
  * @swagger
  * /notas/{id}:
  *   put:
- *     summary: Actualizar una nota de credito existente
+ *     summary: Actualizar una nota de credito por un id existente
  *     description: Permite actualizar uno o varios campos de la nota
- *     tags: [Notas]
+ *     tags: [Notas de Credito]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
+ *         description: ID de la nota de credito a modificar
  *         schema:
  *           type: integer
  *     requestBody:
@@ -118,13 +119,13 @@ router.put("/:id", notaController.updateNota);
  * @swagger
  * /notas/{id}:
  *   delete:
- *     summary: Eliminar una nota de crédito
- *     tags: [Notas]
+ *     summary: Eliminar una nota de crédito por id
+ *     tags: [Notas de Credito]
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID de la nota
+ *         description: ID de la nota de credito a eliminar
  *         schema:
  *           type: integer
  *     responses:

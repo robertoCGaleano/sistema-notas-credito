@@ -37,8 +37,10 @@ const postEmpresa = async (req, res) => {
       nroSap,
       emailContacto,
     });
-    
-    res.status(201).json(nuevaEmpresa);
+    res.status(201).json({
+      message: "Empresa nueva creada con éxito en la base",
+      data: nuevaEmpresa
+    });
   } catch (error) {
     console.error(error);
 
