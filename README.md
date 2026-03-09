@@ -2,103 +2,180 @@
 
 Aplicación web desarrollada para la gestión de **Notas de Crédito**, permitiendo registrar, consultar, modificar y eliminar registros asociados a empresas y usuarios.
 
-Proyecto realizado como trabajo académico.
+Proyecto académico desarrollado en la **Universidad Nacional de Hurlingham**.
 
 ---
 
-## Tecnologías utilizadas
+# Tecnologías utilizadas
 
-### Backend
+## Backend
 - Node.js
 - Express
 - Sequelize
 - SQLite
 
-### Frontend
+## Frontend
 - React
 - Vite
 
-### Documentación y Testing
+## Testing y documentación
 - Postman
 - Swagger
 
 ---
 
-## Arquitectura del proyecto
+# Arquitectura del proyecto
 
 Backend
 
-controllers  
-routes  
-models  
-database  
+data  
+ └ data.db  
 
-Frontend
+src  
+
+controllers  
+ ├ empresa.controller.js  
+ ├ nota.controller.js  
+ ├ user.controller.js  
+ └ index.js  
+
+db  
+
+models  
+
+routes  
+ ├ empresa.route.js  
+ ├ nota.route.js  
+ ├ user.route.js  
+ └ index.js  
+
+main.js  
+
+Frontend  
+
+src  
 
 components  
+ └ NavBar  
+
 pages  
-services  
+ ├ AltaNC  
+ ├ ConsultaNC  
+ ├ DetalleNC  
+ ├ Empresas  
+ └ Login  
+
+router  
+ └ AppRouter.jsx  
+
+styles  
+ └ global.css  
+
+main.jsx  
 
 ---
 
-## Instalación
+# Instalación del proyecto
 
-Clonar el repositorio
+Clonar repositorio
 
-```bash
-git clone https://github.com/TU-USUARIO/TU-REPO.git
+    git clone https://github.com/robertoCGaleano/sistema-notas-credito.git
+
+Entrar al proyecto
+
+    cd sistema-notas-credito
+
+---
+
+# Ejecutar Frontend
 
 Instalar dependencias
-npm install
 
-Ejecutar el servidor
-npm start
+    npm install
 
-El backend corre en:
+Iniciar servidor de desarrollo
+
+    npm run dev
+
+El frontend se ejecuta en:
+
+http://localhost:5173
+
+---
+
+# Ejecutar Backend
+
+Abrir otra terminal y entrar a la carpeta backend
+
+    cd Backend
+
+Instalar dependencias
+
+    npm install
+
+Iniciar servidor
+
+    npm run dev
+
+El backend se ejecuta en:
+
 http://localhost:3001
 
-Documentación de la API
-La API está documentada con Swagger.
+---
 
-Acceder en:
+# Documentación de API
+
+La API se encuentra documentada con Swagger.
+
+Acceder a la documentación en:
+
 http://localhost:3001/api-docs
 
-Desde Swagger se pueden:
+Desde Swagger es posible:
 
-visualizar endpoints
+- visualizar endpoints
+- enviar requests
+- probar respuestas de la API
 
-enviar requests
+---
 
-probar respuestas del backend
+# Endpoints principales
 
-Endpoints principales
+## Usuarios
 
-Usuarios
-POST /user/login
-POST /user
-GET /user
+- POST /user/login  
+- POST /user  
+- GET /user  
 
-Empresas
-POST /empresas
-GET /empresas
-GET /empresas/:id
+## Empresas
 
-Notas de crédito
-GET /notas
-GET /notas/:id
-POST /notas
-PUT /notas/:id
-DELETE /notas/:id
+- POST /empresas  
+- GET /empresas  
+- GET /empresas/:id  
 
-Funcionalidades
-Login de usuarios
-Registro de empresas
-Creación de notas de crédito
-Consulta de notas
-Modificación de notas
-Eliminación de registros
+## Notas de crédito
 
-Autor
-Roberto Galeano
-Universidad Nacional de Hurlingham
+- GET /notas  
+- GET /notas/:id  
+- POST /notas  
+- PUT /notas/:id  
+- DELETE /notas/:id  
+
+---
+
+# Funcionalidades
+
+- Autenticación de usuarios
+- Registro de empresas
+- Creación de notas de crédito
+- Consulta de notas de crédito
+- Modificación de registros
+- Eliminación de registros
+
+---
+
+# Autor
+
+Roberto Galeano  
+Universidad Nacional de Hurlingham  
 2026
