@@ -27,17 +27,38 @@ Proyecto realizado como trabajo académico.
 ## Arquitectura del proyecto
 
 Backend
-
-controllers  
-routes  
-models  
-database  
+- data
+  -data.db
+- src
+  - controllers
+      - empresa.controllers.js
+      - index.js
+      - nota.controllers.js
+      - user.controller.js
+  - db
+      - models
+  - routes
+      - empresa.route.js
+      - index.js
+      - nota.route.js
+      - user.route.js
+  - main.js
 
 Frontend
-
-components  
-pages  
-services  
+- src
+  - components
+    - NavBar
+  - pages
+      - AltaNC
+      - ConsultaNC
+      - DetalleNC
+      - Empresas
+      - Login
+  - router
+      - AppRouter.jsx
+  - styles
+      - global.css
+  - main.jsx
 
 ---
 
@@ -46,13 +67,13 @@ services
 Clonar el repositorio
 
 ```bash
-git clone https://github.com/TU-USUARIO/TU-REPO.git
+git clone[https://github.com/robertoCGaleano/sistema-notas-credito.git]
 
 Instalar dependencias
 npm install
 
 Ejecutar el servidor
-npm start
+npm run dev
 
 El backend corre en:
 http://localhost:3001
