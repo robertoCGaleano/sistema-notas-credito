@@ -142,57 +142,36 @@ function ConsultaNC() {
           </select>
 
         </div>
+
         <p className="subtitulo">Total de Notas de Creditos: {notasFiltradas.length}</p>
-        <table>
+        
+        <div className="notas-grid">
+          {notasFiltradas.map((nc) => (
+            <div key={nc.idNotaCredito} className={`nota-card ${nc.estado}`}>
+              <div className="card-header">
+                <span className="empresa-nombre">{nc.Empresa?.razonSocial}</span>
+                <span className={`estado-nota ${nc.estado}`}>{nc.estado}</span>
+              </div>
+              
+              <div className="card-body">
+                <p><strong>Cliente:</strong> {nc.Empresa?.nroCliente}</p>
+                <p><strong>CUIT:</strong> {nc.Empresa?.cuit}</p>
+                <p className="monto-nota">Monto: ${nc.monto.toLocaleString()}</p>
+                <p className="fecha">📅Fecha: {nc.fechaCreacion}</p>
+                <p className="usuario">👤Responsable:  {nc.Usuario?.nombre}</p>
+              </div>
 
-          <thead>
-          
-            <tr>
-              <th>Empresa</th>
-              <th>N° Cliente</th>
-              <th>CUIT</th>
-              <th>Monto</th>
-              <th>Estado</th>
-              <th>Fecha</th>
-              <th>Usuario</th>
-              <th>Acciones</th>
-            </tr>
-
-          </thead>
-
-          <tbody>
-
-            {notasFiltradas.map((nc) => (
-
-              <tr key={nc.idNotaCredito}>
-
-                <td>{nc.Empresa?.razonSocial}</td>
-                <td>{nc.Empresa?.nroCliente}</td>
-                <td>{nc.Empresa?.cuit}</td>
-                <td>${nc.monto}</td>
-                <td>{nc.estado}</td>
-                <td>{nc.fechaCreacion}</td>
-                <td>{nc.Usuario?.nombre}</td>
-
-                <td>
-
-                  <button onClick={() => handleVer(nc.idNotaCredito)}>
-                    Ver
-                  </button>
-
-                  <button onClick={() => handleBorrar(nc.idNotaCredito)}>
-                    Borrar
-                  </button>
-
-                </td>
-
-              </tr>
-
-            ))}
-
-          </tbody>
-
-        </table>
+              <div className="card-btn">
+                <button className="btn-ver" onClick={() => handleVer(nc.idNotaCredito)}>
+                  Ver Detalle
+                </button>
+                <button className="btn-borrar" onClick={() => handleBorrar(nc.idNotaCredito)}>
+                  Borrar
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
 
       </div>
 

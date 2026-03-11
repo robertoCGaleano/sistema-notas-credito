@@ -1,93 +1,187 @@
-.consulta-container {
-  padding: 30px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0px 3px 10px rgba(0,0,0,0.1);
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.titulo {
+.consulta-container {
+  padding: clamp(10px, 3%, 30px); 
+  background-color: #f8f6ff; 
+  width: 100%;             
+  max-width: 100%;         
+  margin: 0 auto;
+  min-height: 100vh;
+  overflow-x: hidden;     
+}
+
+h2.titulo {
+  margin-top: 10px;
   margin-bottom: 20px;
   font-weight: bold;
-  font-size: 28px;
-  color: #6a0dad;
+  font-size: clamp(22px, 5vw, 34px); 
+  color: #4b2aad;
 }
 
-.subtitulo {
-  font-weight: bold;
+p.subtitulo {
+  font-weight:bold;
   margin-bottom: 10px;
+  color: #8a7fb1;
+  font-size: 14px;
 }
 
+/*FILTROS */
 .filtros {
   display: flex;
+  flex-wrap: wrap; 
   gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+  margin-bottom: 25px;
+  padding: 15px;
+  background: #efebff;
+  border-radius: 12px;
+  border: 1px solid #e1d9ff;
+  width: 100%;
 }
 
-.filtros input {
+.filtros input, .filtros select {
+  padding: 10px;
+  border: 1px solid #dcd3ff;
+  border-radius: 8px;
+  font-size: 14px;
+  flex: 1 1 180px; 
+  min-width: 0; 
+  background: white;
+}
+.filtros input:focus, .filtros select:focus {
+  border-color: #6a0dad; 
+  outline: none;    
+  box-shadow: 0 0 10px rgba(106, 13, 173, 0.2); 
+  background-color: #ffffff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* SECTOR TARJETAS de NOTAS de CREDITOS*/
+.notas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 15px;
+  width: 100%;
+}
+
+.nota-card {
+  background: #ffffff;
+  border: 1px solid #e1d9ff;
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  width: 100%; 
+}
+
+.nota-card:hover {
+  border-color: #6a0dad;
+  transform: translateY(-3px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.empresa-nombre {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #2d1e5f;
+  word-break: break-word; 
+}
+
+.estado-nota {
+  font-size: 10px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-weight: 700;
+  white-space: nowrap; 
+}
+
+.estado-nota.aprobada { color: #2e7d32; background: #e8f5e9; }
+.estado-nota.enProceso { color: #ef6c00; background: #fff3e0; }
+.estado-nota.rechazada { color: #b6210d; background: #ffebee; }
+
+.monto-nota {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #6a0dad;
+  margin: 10px 0 !important;
+}
+
+.card-body p {
+  font-size: 13px;
+  margin: 4px 0;
+  color: #5c527f;
+}
+
+/*BOTONES*/
+.card-btn {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 15px;
+}
+
+.card-btn button {
+  flex: 1;
   padding: 8px;
-  border: 1px solid #ccc;
   border-radius: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+}
+.btn-ver {
+  background: #ece7ff; 
+  color: #6a0dad;      
+  border: 1px solid #d1c4ff !important;
+  transition: all 0.3s ease;
+}
+.btn-ver:hover, .btn-ver:focus {
+  background: #6a0dad; 
+  color: white;        
+  box-shadow: 0 4px 8px rgba(106, 13, 173, 0.2); 
+  outline: none;      
+}
+
+.btn-borrar {
+  background: #fff;
+  color: #a098bc;      
+  border: 1px solid #eee !important;
+  transition: all 0.3s ease;
+}
+.btn-borrar:hover, .btn-borrar:focus {
+  background: #fff5f5;   
+  color: #f44336;       
+  border-color: #ffcdd2 !important;
   outline: none;
 }
 
-.filtros select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
 
-.filtros input:focus {
-  border: 1px solid #6a0dad;
-  box-shadow: 0px 0px 4px rgba(106,13,173,0.4);
-}
+@media (max-width: 480px) {
+  .consulta-container {
+    padding: 10px;
+  }
+  
+  .filtros {
+    padding: 10px;
+    gap: 8px;
+  }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
+  .filtros input, .filtros select {
+    flex: 1 1 100%;
+  }
 
-
-tbody tr:nth-child(even) {
-  background-color: #f5f5f5;
-}
-
-th, td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-}
-
-th {
-  background-color: #6a0dad;
-  color: white;
-  padding: 12px;
-}
-
-td button {
-  margin: 0 5px;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-td button:first-child {
-  background-color: #2196f3;
-  color: white;
-}
-
-td button:last-child {
-  background-color: #b6210d;
-  color: white;
-}
-
-td button:hover {
-  opacity: 0.8;
-}
-
-tbody tr:hover {
-  background-color: #e9e3ff;
-  font-weight: bold;
+  .notas-grid {
+    grid-template-columns: 1fr; 
+  }
 }
