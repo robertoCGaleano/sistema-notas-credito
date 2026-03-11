@@ -1,59 +1,96 @@
 .navbar {
-  height: 60px;
+  min-height: 60px; 
   background-color: #4b2aad;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 30px;
   color: white;
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  padding: 10px 20px;
+  flex-wrap: wrap; 
+  gap: 15px;
 }
+
 .navbar-logo {
   display: flex;
   flex-direction: column;
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .logo-titulo {
-  font-size: 22px;
-  font-weight: bold;
-  letter-spacing: 2px;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #fff;
 }
 
 .logo-subtitulo {
-  font-size: 10px;
-  opacity: 0.8;
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
 }
 
 .navbar-links {
   display: flex;
-  gap: 30px;
+  align-items: center;
+  gap: 15px;
 }
 
 .navbar-links a {
   color: white;
   text-decoration: none;
-  font-weight: 500;
-  padding: 6px 10px;
-  transition: opacity 0.2s;
+  font-weight: 600; 
+  font-size: 18px;  
+  padding: 8px 12px;
+  transition: all 0.3s ease;
 }
 
 .navbar-links a:hover {
-  opacity: 0.7;
-  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 1;
 }
 
 .logout-button {
-  background-color: #b6210d;
-  border: none;
-  color: white;
-  cursor: pointer;
+  background: #fff;
+  color: #a098bc;
   font-weight: bold;
-  padding: 6px 10px;
-  border-radius: 5px;
-  transition: background-color 0.2s;
+  padding: 8px; 
+  border-radius: 6px;
+  border: 1px solid #eee !important;
+  font-size: 14px; 
+}
+.logout-button:hover, .logout-button:focus {
+  background: #fff5f5;
+  color: #f44336;
+  border-color: #ffcdd2 !important;
+  outline: none;
+  transform: scale(1.05); 
 }
 
-.logout-button:hover {
-  background-color: rgba(255,255,255,0.2);
+/* PARA CELULARES */
+@media (max-width: 768px) {
+  .navbar {
+    justify-content: center; 
+    text-align: center;
+  }
+  .navbar-logo {
+    width: 100%; 
+    margin-bottom: 5px;
+  }
+  .navbar-links {
+    width: 100%;
+    justify-content: center;
+    gap: 10px;
+  }
+  .logo-titulo {
+    font-size: 24px;
+  }
+  .logo-subtitulo {
+    display: none; 
+  }
+  .navbar-links a {
+    font-size: 16px;
+    padding: 5px 8px;
+  }
 }
