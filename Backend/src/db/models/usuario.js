@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     legajo: {
       type: DataTypes.INTEGER,
       primaryKey: true,
+      unique: { msg: "El número de legajo ya se encuentra registrado" },
       allowNull: false
     },
     nombre: {
@@ -23,7 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: { msg: "Este correo electrónico ya está registrado" },
+      validate: {
+        notEmpty: { msg: "El email es obligatorio" }, 
+        isEmail: { msg: "Formato de email inválido" }
+      }
     },
     password: {
       type: DataTypes.STRING,

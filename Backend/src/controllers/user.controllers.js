@@ -29,4 +29,30 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = {getUsers, login};
+//POST NUEVO USER
+const crearUsuario = async (req, res) => {
+  try {
+    const { legajo, nombre, email, password, admin } = req.body;
+    // Validación luego crear middleware
+    if (!legajo || !nombre || !email || !password) {
+      return res.status(400).json({ message: "Faltan datos obligatorios" });
+    }
+    const nuevoUsuario = await db.Usuario.create({
+      legajo,
+      nombre,
+      email,
+      password, 
+      admin: false 
+    });
+
+    res.status(201).json({ message: "Usuario creado con éxito", user: nuevoUsuario });
+  } catch (error) {
+    if (error.name === "SequelizeUniqueConstraintError" || error.name === "SequelizeValidationError") {
+      return res.status(400).json({ message: error.errors[0].message });
+    }
+    console.error(error);
+    res.status(500).json({ message: "Error interno del servidor" });
+  }
+};
+
+module.exports = {getUsers, login, crearUsuario};
