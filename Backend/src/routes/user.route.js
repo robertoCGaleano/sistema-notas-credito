@@ -1,7 +1,7 @@
 const { Router } = require("express");
 const router = Router();
 
-const { userController } = require("../controllers");
+const { userController } = require("../controllers/index");
 
 /**
  * @swagger
@@ -49,5 +49,7 @@ router.get("/", userController.getUsers);
  *         description: Credenciales inválidas (legajo o contraseña incorrectos)
  */
 router.post("/login", userController.login);
+
+router.post("/register", userController.crearUsuario); // Esta es la URL: http://localhost:3001/user/register
 
 module.exports = router;

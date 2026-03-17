@@ -9,6 +9,11 @@ const Login = () => {
   const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  //Variables agregadas para crear un usuario nuevo como admin:false 
+  //Para que un usuario pueda ser admin:true se debe hacer directamente en la BD.
+  const [nombre, setNombre] = useState("");
+  const [email, setEmail] = useState("");
+  const [esRegistro, setEsRegistro] = useState(false); // Switch para modo Registro
 
   const handleLogin = async (e) => {
   e.preventDefault();
@@ -30,40 +35,70 @@ const Login = () => {
         password: password
       })
     });
-
     const data = await response.json();
-
     if (!response.ok) {
       setError(data.message);
       return;
-    }
-    
+    } 
     localStorage.setItem("usuarioLogueado", JSON.stringify(data.user));
-
     navigate("/altaNC");
-
-  } catch (error) {
+  }
+    catch (error) {
     setError("Error de conexión con el servidor");
   }
 };
 
-const handleCrearUsuario = () => {
-  navigate("/crearUsuario");
+const handleCrearUsuario = async (e) => {
+  if (e) e.preventDefault();
+
+  //Validación 
+  if (!usuario || !password || !nombre || !email) {
+    setError("Todos los campos deben estar completos para el registro");
+    return;
+  }
+  try {
+    const response = await fetch("http://localhost:3001/user/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        legajo: Number(usuario), 
+        password: password,
+        nombre: nombre,
+        email: email,
+        admin: false 
+      })
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      setError(data.message || "Error al crear usuario");
+      return; 
+    }
+    alert("Usuario creado correctamente");
+    // Limpiar campos
+    setNombre("");
+    setEmail("");
+    setUsuario("");
+    setPassword("");
+    setError(""); 
+    setEsRegistro(false);
+
+  } catch (err) {
+    setError("Error de conexión con el servidor");
+  }
 };
 
   return (
-
     <div className="login-container">
-
       <div className="login-box">
-
         <h2 className="login-title">SGNC</h2>
-        <p className="login-subtitle">Sistema de Gestión de Notas de Crédito</p>
-
-        <form onSubmit={handleLogin}>
+        <p className="login-subtitle">
+          {esRegistro ? "Registro de Nuevo Usuario" : "Sistema de Gestión de Notas de Crédito"}
+        </p>
+        <form onSubmit={esRegistro ? handleCrearUsuario : handleLogin}>
 
           <div className="login-field">
-            <label>Usuario</label>
+            <label>Legajo de Usuario</label>
             <input
               type="text"
               value={usuario}
@@ -71,6 +106,30 @@ const handleCrearUsuario = () => {
             />
           </div>
 
+          {/* Campo Nombre solo en modo registro*/}
+          {esRegistro && (
+            <>
+              <div className="login-field">
+                <label>Nombre y Apellido</label>
+                <input 
+                  type="text" 
+                  value={nombre} 
+                  onChange={(e) => setNombre(e.target.value)} 
+                />
+              </div>
+
+              {/* Campo Email solo en modo registro*/}
+              <div className="login-field">
+                <label>Email</label>
+                <input 
+                  type="email" 
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)} 
+                />
+              </div>
+            </>
+          )}
+          
           <div className="login-field">
             <label>Contraseña</label>
             <input
@@ -87,7 +146,7 @@ const handleCrearUsuario = () => {
           )}
 
           <button className="login-button" type="submit">
-            Ingresar
+            {esRegistro ? "Registrarme" : "Ingresar"}
           </button>
 
         </form>
@@ -96,9 +155,12 @@ const handleCrearUsuario = () => {
 
           <button
             className="crear-usuario-button"
-            onClick={handleCrearUsuario}
+            onClick={() => {
+              setEsRegistro(!esRegistro);
+              setError(""); 
+            }}
           >
-            Crear usuario
+            {esRegistro ? "¿Ya tenés cuenta? Ingresá acá" : "¿No tenés cuenta? Creala aquí"}
           </button>
 
         </div>
