@@ -22,7 +22,7 @@ Antes de escribir el código, apliqué metodologías de Ingeniería de Requerimi
 <br>
 
 <p align="center">
-  <img src="./img/Login.png" alt="Pantalla de Login" width="800" style="border-radius: 10px; border: 1px solid #e1e4e6;" />
+  <img src="./img/Login.png" alt="Pantalla de Login" style="max-width: 100%; height: auto; border-radius: 10px; border: 1px solid #e1e4e6;" />
   <br><br>
   <em>Interfaz de acceso para los usuarios operativos del sistema.</em>
 </p>
