@@ -1,179 +1,94 @@
-# Sistema Web de Gestión de Notas de Crédito
+# 📊 Sistema Web de Gestión de Notas de Crédito (SGNC)
 
-Aplicación web desarrollada para la gestión de **Notas de Crédito**, permitiendo registrar, consultar, modificar y eliminar registros asociados a empresas y usuarios.
-
-Proyecto académico desarrollado en la **Universidad Nacional de Hurlingham**.
-
----
-
-# Tecnologías utilizadas
-
-## Backend
-- Node.js
-- Express
-- Sequelize
-- SQLite
-
-## Frontend
-- React
-- Vite
-
-## Testing y documentación
-- Postman
-- Swagger
+### 📌 Origen e Inspiración del Proyecto
+Este es mi proyecto integrador para la **Tecnicatura en Programación (UNAHUR)**. Nació de observar un problema operativo real en los equipos de atención al cliente (Customer Service): la gestión manual de notas de crédito mediante planillas Excel y comentarios de texto sueltos. Esto genera pérdida de información histórica, errores manuales y falta de trazabilidad. Tomé este escenario laboral como caso de estudio académico para diseñar y desarrollar una solución de software de punta a punta.
 
 ---
 
-# Arquitectura del proyecto
+### 📋 Ingeniería de Requerimientos & Análisis Funcional (Mi Fuerte)
+Antes de escribir el código, apliqué metodologías de Ingeniería de Requerimientos para modelar la lógica del negocio. La documentación completa (BRD y FRD) se encuentra estructurada bajo las siguientes definiciones clave:
 
-Backend
-
-data  
- └ data.db  
-
-src  
-
-controllers  
- ├ empresa.controller.js  
- ├ nota.controller.js  
- ├ user.controller.js  
- └ index.js  
-
-db  
-
-models  
-
-routes  
- ├ empresa.route.js  
- ├ nota.route.js  
- ├ user.route.js  
- └ index.js  
-
-main.js  
-
-Frontend  
-
-src  
-
-components  
- └ NavBar  
-
-pages  
- ├ AltaNC  
- ├ ConsultaNC  
- ├ DetalleNC  
- ├ Empresas  
- └ Login  
-
-router  
- └ AppRouter.jsx  
-
-styles  
- └ global.css  
-
-main.jsx  
+*   **9 Reglas de Negocio (RN) Críticas Implementadas:**
+    *   **RN-01 / RN-02:** Toda nota de crédito debe estar asociada obligatoriamente a un usuario logueado y a una empresa.
+    *   **RN-03 / RN-04:** El CUIT y el número de cliente de la empresa deben ser únicos en la base de datos.
+    *   **RN-07:** Control estricto del ciclo de vida del documento mediante estados: *Creada, En Proceso, Anulada*.
+    *   **RN-08:** Validación en el backend para asegurar que el monto de la Nota de Crédito sea mayor a cero.
+*   **Historias de Usuario (User Stories):** Relevamiento detallado con criterios de aceptación precisos para los módulos de Autenticación, Creación, Consulta avanzada por filtros y Modificación de registros.
 
 ---
 
-# Instalación del proyecto
+### 🛠️ Tecnologías Utilizadas
 
-Clonar repositorio
-
-    git clone https://github.com/robertoCGaleano/sistema-notas-credito.git
-
-Entrar al proyecto
-
-    cd sistema-notas-credito
+*   **Backend:** Node.js, Express, Sequelize (ORM)
+*   **Base de Datos:** SQLite (Implementada para centralizar la persistencia de datos y eliminar el uso de archivos Excel)
+*   **Frontend:** React, Vite, CSS Global
+*   **Testing y Documentación:** Postman, Swagger UI
 
 ---
 
-# Ejecutar Frontend
+### 📂 Arquitectura del Proyecto
 
-    npm install
+#### 🖥️ Backend
+```text
+data
+└ data.db (Persistencia)
+src
+├── controllers (Lógica de control para empresas, notas y usuarios)
+├── db (Conexión y configuración del ORM)
+├── models (Modelos de datos con Sequelize)
+├── routes (Definición de endpoints)
+└── main.js (Punto de entrada de la API)
+```
 
-Iniciar servidor de desarrollo
-
-    npm run dev
-
-El frontend se ejecuta en:
-
-http://localhost:5173
-
----
-
-# Ejecutar Backend
-
-Abrir otra terminal y entrar a la carpeta backend
-
-    cd Backend
-
-Instalar dependencias
-
-    npm install
-
-Iniciar servidor
-
-    npm run dev
-
-El backend se ejecuta en:
-
-http://localhost:3001
+#### 🎨 Frontend
+```text
+src
+├── components (Componentes reutilizables como NavBar)
+├── pages (Módulos: AltaNC, ConsultaNC, DetalleNC, Empresas, Login)
+├── router (Gestión de rutas con AppRouter.jsx)
+└── styles (global.css)
+```
 
 ---
 
-# Documentación de API
+### 🚀 Instalación y Ejecución Local
 
-La API se encuentra documentada con Swagger.
+#### 1. Clonar el repositorio
+```bash
+git clone https://github.com/robertoCGaleano/sistema-notas-credito.git
+cd sistema-notas-credito
+```
 
-Acceder a la documentación en:
+#### 2. Ejecutar el Frontend
+```bash
+npm install
+npm run dev
+```
+*El frontend se ejecutará en: `http://localhost:5173`*
 
-http://localhost:3001/api-docs
-
-Desde Swagger es posible:
-
-- visualizar endpoints
-- enviar requests
-- probar respuestas de la API
-
----
-
-# Endpoints principales
-
-## Usuarios
-
-- POST /user/login  
-- POST /user  
-- GET /user  
-
-## Empresas
-
-- POST /empresas  
-- GET /empresas  
-- GET /empresas/:id  
-
-## Notas de crédito
-
-- GET /notas  
-- GET /notas/:id  
-- POST /notas  
-- PUT /notas/:id  
-- DELETE /notas/:id  
+#### 3. Ejecutar el Backend
+Abra otra terminal y entre a la carpeta del servidor:
+```bash
+cd Backend
+npm install
+npm run dev
+```
+*El backend se ejecutará en: `http://localhost:3001`*
 
 ---
 
-# Funcionalidades
+### 📖 Documentación de la API (Swagger)
+La API cuenta con documentación interactiva mediante Swagger UI. Una vez levantado el backend, podés acceder en:
+👉 `http://localhost:3001/api-docs`
 
-- Autenticación de usuarios
-- Registro de empresas
-- Creación de notas de crédito
-- Consulta de notas de crédito
-- Modificación de registros
-- Eliminación de registros
+Desde la interfaz de Swagger es posible visualizar la estructura de los endpoints, realizar peticiones de prueba en tiempo real y verificar el manejo de respuestas y códigos de estado HTTP.
+
+#### Endpoints Principales:
+*   **Usuarios:** `POST /user/login` | `POST /user` | `GET /user`
+*   **Empresas:** `POST /empresas` | `GET /empresas` | `GET /empresas/:id`
+*   **Notas de Crédito:** `GET /notas` | `GET /notas/:id` | `POST /notas` | `PUT /notas/:id` | `DELETE /notas/:id`
 
 ---
 
-# Autor
-
-Roberto Galeano  
-Universidad Nacional de Hurlingham  
-2026
+### 👤 Autor
+*   **Roberto Galeano** - *Técnico en Programación* - Universidad Nacional de Hurlingham (2026)
