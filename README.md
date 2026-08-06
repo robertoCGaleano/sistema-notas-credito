@@ -16,12 +16,13 @@ Antes de escribir el código, apliqué metodologías de Ingeniería de Requerimi
 * **Historias de Usuario (User Stories):** Relevamiento detallado con criterios de aceptación precisos para los módulos de Autenticación, Creación, Consulta avanzada por filtros y Modificación de registros.
 
 ---
+
 ### Vista previa del Sistema
 
 <br>
 
 <p align="center">
-  <img src="img/Login.jpg" alt="Pantalla de Login" />
+  <img src="img/Login.jpg" alt="Pantalla de Login" width="400" style="border-radius: 10px; border: 1px solid #e1e4e6;" />
   <br><br>
   <em>Interfaz de acceso para los usuarios operativos del sistema.</em>
 </p>
@@ -35,6 +36,7 @@ Antes de escribir el código, apliqué metodologías de Ingeniería de Requerimi
 </p>
 
 <br>
+
 ---
 
 ### Tecnologías Utilizadas
