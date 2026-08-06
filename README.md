@@ -19,10 +19,10 @@ Antes de escribir el código, apliqué metodologías de Ingeniería de Requerimi
 
 ### Vista previa del Sistema
 
-![Pantalla de Login](img/Login.png)
+![Pantalla de Login](img/Login.jpg)
 *Interfaz de acceso para los usuarios operativos del sistema.*
 
-![Consulta de Notas de Crédito](img/ConsultaDeNC.png)
+![Consulta de Notas de Crédito](img/ConsultaDeNC.jpg)
 *Módulo de búsqueda avanzada por filtros múltiples y control de estados.*
 
 ---
