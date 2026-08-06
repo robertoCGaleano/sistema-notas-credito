@@ -19,11 +19,23 @@ Antes de escribir el código, apliqué metodologías de Ingeniería de Requerimi
 
 ### Vista previa del Sistema
 
-![Pantalla de Login](img/Login.jpg)
-*Interfaz de acceso para los usuarios operativos del sistema.*
+<br>
 
-![Consulta de Notas de Crédito](img/ConsultaDeNC.jpg)
-*Módulo de búsqueda avanzada por filtros múltiples y control de estados.*
+<p align="center">
+  <img src="./img/Login.png" alt="Pantalla de Login" width="800" style="border-radius: 10px; border: 1px solid #e1e4e6;" />
+  <br><br>
+  <em>Interfaz de acceso para los usuarios operativos del sistema.</em>
+</p>
+
+<br><br>
+
+<p align="center">
+  <img src="./img/ConsultaDeNC.jpg" alt="Consulta de Notas de Crédito" width="800" style="border-radius: 10px; border: 1px solid #e1e4e6;" />
+  <br><br>
+  <em>Módulo de búsqueda avanzada por filtros múltiples y control de estados.</em>
+</p>
+
+<br>
 
 ---
 
